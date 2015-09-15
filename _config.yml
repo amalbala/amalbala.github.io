@@ -85,11 +85,11 @@ kramdown:
     coderay_tab_width: 4
     coderay_bold_every: 10
     coderay_css: class
-
+    
 prose:
   rooturl: '_posts'
-  siteurl: 'http://hmfaysal.github.io/'
-  relativeLinks: 'http://hmfaysal.github.io/links.jsonp'
+  siteurl: 'http://amalbala.github.io/'
+  relativeLinks: 'http://amamlbala.github.io/links.jsonp'
   media: 'images'
   metadata:
     _posts:
