@@ -1,0 +1,320 @@
+---
+layout: post
+title: |-
+  BDD en Objective-C. Primeras impresiones usando KIWI en
+  xCode
+date: 2013-06-13 10:42:12.000000000 +02:00
+type: post
+published: true
+status: publish
+categories:
+- Agile
+- BDD
+- Development
+- iOS
+- Learning
+- Productivity
+- TDD
+tags: []
+meta:
+  _edit_last: '38291848'
+  _publicize_pending: '1'
+author:
+  login: virtualminder
+  email: amalbala@gmail.com
+  display_name: AM Albalá
+  first_name: ''
+  last_name: ''
+---
+<p><a href="http://virtualminder.files.wordpress.com/2013/06/bdd.png"><img class="size-full wp-image-251 aligncenter" alt="bdd" src="{{ site.baseurl }}/assets/bdd.png" width="383" height="280" /></a> Desde hace un par de<br />
+semanas vengo probando y usando una librería para hacer <a href="http://en.wikipedia.org/wiki/Behavior-driven_development">BDD</a><br />
+con un proyecto para el iPad. Eso conlleva usar Objective-C y el<br />
+entorno de desarrollo <a href="https://developer.apple.com/xcode/">xCode</a>. Lo<br />
+primero y principal es pedir disculpas por mi atrevimiento, nunca<br />
+antes había programado en Objective-C, ni usado xCode y tampoco<br />
+anteriormente había hecho proyectos usando <a href="http://en.wikipedia.org/wiki/Behavior-driven_development">BDD</a>,<br />
+así que me adentro en un mundo completamente desconocido para mi.<br />
+Mi objetivo con este post es conseguir que tú tambien te animes a<br />
+salir de la zona de confort y a disfrutar de nuevo conocimiento.<br />
+Vamos al lio.</p>
+<p><!--more--></p>
+<h1>Conceptos</h1>
+<p> Para ir abreviando, <a href="https://developer.apple.com/xcode/">xCode</a> es el<br />
+entorno por defecto de programación para Mac y el lenguaje para<br />
+programar aplicaciones para iPhone, iPad y Mac es Objective-C que<br />
+no es más que una extensión de C++. Así que si habéis programado en<br />
+C++ antes  y usado algún IDE como Visual Studio. Netbeans o<br />
+Eclipse, esto es más de lo mismo. Tendréis que aprender las<br />
+características del entorno y para ello os aconsejo el <a href="http://developer.apple.com/library/ios/#DOCUMENTATION/iPhone/Conceptual/iPhone101/Articles/00_Introduction.html">tutorial<br />
+de la sección de desarrolladores de Apple.</a> <a href="http://en.wikipedia.org/wiki/Behavior-driven_development">BDD</a>:<br />
+este es un concepto que me encanta, había usado <a href="http://en.wikipedia.org/wiki/Test-driven_development">TDD</a><br />
+antes en proyectos pequeños (podéis ver algunos en <a href="https://github.com/amalbala">mi cuenta de<br />
+GitHub</a>) y ya me gustó desde el principio. <a href="http://en.wikipedia.org/wiki/Test-driven_development">TDD</a><br />
+es (Test Driven Development = Diseño dirigido por pruebas) deciros<br />
+que una técnica de programación que se basa en escribir las pruebas<br />
+antes que el código y que sean estas el motor del diseño de la<br />
+aplicación. Hay muchos recursos sobre TDD mis favoritos son <a href="http://www.dirigidoportests.com/el-libro">el libro de<br />
+Carlos Blé "Diseño Ágil con TDD"</a>, con el que yo aprendí<br />
+qué es y cómo se aplica <a href="http://en.wikipedia.org/wiki/Test-driven_development">TDD</a>,<br />
+y también el fantastico <a href="http://iwt2-javierj.tumblr.com/">Blog de Javier<br />
+Gutierrez</a> y <a href="http://es.scribd.com/doc/137055522/Desarrollo-Dirigido-por-Pruebas-Practico">su<br />
+libro</a> al que además tengo mucho que agradecer porque me<br />
+ha ayudado directamente en este proyecto resolviendo dudas y dando<br />
+consejos. <a href="http://en.wikipedia.org/wiki/Behavior-driven_development">BDD</a><br />
+es una evolución de <a href="http://en.wikipedia.org/wiki/Test-driven_development">TDD</a>,<br />
+cuyo objetivo no es más (ni menos) que acercar el lenguaje de <a href="http://en.wikipedia.org/wiki/Test-driven_development">TDD</a><br />
+a algo más natural, algo que cualquiera pueda entender y que<br />
+permite que las pruebas se expliquen por si mismas y ya que son el<br />
+motor del diseño del código sirvan como medio de comunicación entre<br />
+las partes implicadas en el proyecto. Podéis ver en el <a href="http://dannorth.net/introducing-bdd/">blog de Dan North<br />
+las razones de BDD</a>. Para mi es mucho más claro y útil BDD<br />
+que TDD, aunque para un programador o artesano del software, quizás<br />
+es más intuitivo empezar con <a href="http://en.wikipedia.org/wiki/Test-driven_development">TDD</a><br />
+y luego digi-evolucionar a <a href="http://en.wikipedia.org/wiki/Behavior-driven_development">BDD</a>.<br />
+Yo aconsejo a cualquiera que programe que intente aplicar estos<br />
+conceptos en su día a día, pero con racionalidad, cogiéndolo poco a<br />
+poco, primero proyectos o katas pequeñas<br />
+para familiarizarse con el lenguaje y la terminología,<br />
+así como de las técnicas y pasos que hay que dar para aplicar el<br />
+proceso completo. Al principio sorprende un poco y puede que no se<br />
+le vea la utilidad, pero la tiene, tanto en proyecto grandes como<br />
+pequeños. De verdad si queréis programar con calidad, optimizar<br />
+vuestro tiempo de desarrollo y construir proyectos de futuro,<br />
+tenéis que aprender estos conceptos. No os conformeis. Por resumir<br />
+muchísimo, BDD transforma las <a href="http://es.wikipedia.org/wiki/Historias_de_usuario">historias<br />
+de usuario</a> en código, así podemos expresar ideas como:</p>
+<blockquote><p><strong>Historia</strong>: Conducir<br />
+un coche <strong>Para</strong> poder conducir un coche<br />
+<strong>Como</strong> conductor<br />
+<strong>Quiero</strong> poder arrancar el coche<br />
+<strong>Y</strong> acelerar<br />
+<strong>Y</strong> frenar<br />
+<strong>Y</strong> girar a derecha e izquierda<br />
+<strong>Y</strong> parar el coche</p></blockquote>
+<p>Esa es nuestra historia y cada bloque<br />
+<strong>Y</strong> indica un contexto o situación que<br />
+tenemos que modelar:<br />
+<blockquote><strong>Situación<br />
+1:</strong> Quiero poder arrancar el coche<br />
+<strong>Dado</strong> un coche<br />
+<strong>Cuando</strong> me monto en el coche<br />
+<strong>Entonces</strong> quiero arrancarlo<br />
+<strong>Situación 2:</strong> Acelerar<br />
+<strong>Dado</strong> un coche arrancado<br />
+<strong>Cuando</strong> presiono el acelerador<br />
+<strong>Quiero</strong> que la velocidad aumente<br />
+ <strong>Situación 3:</strong>  Frenar<br />
+<strong>Dado</strong> un coche arrancado<br />
+<strong>Cuando</strong> presiono el freno<br />
+<strong>Quiero</strong> que la velocidad disminuya si<br />
+no es 0  <strong>Situación 4</strong>: Girar<br />
+a derecha e izquierda <strong>Dado</strong> un coche<br />
+arrancado y con una velocidad mayor que 0<br />
+<strong>Cuando</strong> giro el volante a derecha o<br />
+izquierda <strong>Quiero</strong> que la posición del<br />
+coche se modifique girando en la dirección<br />
+indicada</p></blockquote>
+<p> Si queréis ver <a href="http://davemeehan.com/technology/unit-testing/test-and-behaviour-driven-development-on-ios-with-kiwi#Telling_a_Story_BDD_Style">un<br />
+ejemplo más orientado a estructuras de datos</a>, en el blog<br />
+de Dave Meehan tenéis uno igual con la historia de una Pila.</p>
+<h1>Kiwi en xCode</h1>
+<p> Ahora viene lo complicado. Sí,<br />
+vale, genial, esta forma de definir un problema está muy bien, es<br />
+estructurada y la entiende todo el mundo, pero ¿cómo pasamos esto a<br />
+código? ¿Cómo hacemos para comprobar que nuestro código hace lo que<br />
+esperamos según nuestra historia?. Para aplicar BDD, hay muchas<br />
+plataformas y entornos que permite aplicarlo en distintos<br />
+lenguajes, el más extendido es Cucumber que soporta muchos<br />
+lenguajes, y también está JBehave que funciona sobre Java. Cuando<br />
+me embarqué en este proyecto no sabía mucho ni sobre <a href="http://en.wikipedia.org/wiki/Behavior-driven_development">BDD</a>,<br />
+ni sobre Objective-C y como el objetivo era una aplicación para el<br />
+iPad, busqué un poco por internet y descubrí una librería que ahora<br />
+os presento Kiwi. Con Kiwi conseguiremos pasar del texto anterior a<br />
+una estructura compilable de este estilo: <code> #import<br />
+"Kiwi.h" SPEC_BEGIN(CocheSpecs) describe(@"Con un coche", ^{
+<p style="padding-left:30px;">context(@"cuando nos montamos en un<br />
+coche", ^{</p>
+<p style="padding-left:60px;">pending(@"el coche debe poder<br />
+arrancarse", ^{</p>
+<p style="padding-left:60px;">});</p>
+<p style="padding-left:30px;">});</p>
+<p style="padding-left:30px;">context(@"con un coche arrancado",<br />
+^{</p>
+<p style="padding-left:60px;">pending(@"el coche<br />
+debe poder acelerarse", ^{</p>
+<p style="padding-left:60px;">}); pending(@"el coche debe poder<br />
+frenarse", ^{</p>
+<p style="padding-left:60px;">});</p>
+<p style="padding-left:30px;">});</p>
+<p style="padding-left:30px;">context(@"Cuando el coche se mueve",<br />
+^{</p>
+<p style="padding-left:60px;">pending(@"el coche<br />
+debe poder girar a la derecha", ^{</p>
+<p style="padding-left:60px;">}); pending(@"el coche debe poder<br />
+girar a la izquierda", ^{</p>
+<p style="padding-left:60px;">});</p>
+<p style="padding-left:30px;">});</p>
+<p> }); SPEC_END<br />
+</code> Kiwi es simplemente eso, una librería que permite<br />
+pasar los escenarios de BDD a pruebas con las que ir construyendo<br />
+nuestro software. Comparándolo con el esquema anterior Kiwi nos<br />
+permite pasar de: <strong>Historia</strong> ....
+<p style="padding-left:30px;"><strong>Escenario</strong><br />
+....</p>
+<p style="padding-left:60px;"><strong>Dado</strong> ...<br />
+<strong>Cuando</strong> ...<br />
+<strong>Quiero</strong> ....</p>
+<p> A<br />
+<strong>Describe</strong> ....
+<p style="padding-left:30px;"><strong>Context</strong><br />
+....</p>
+<p style="padding-left:60px;"><strong>it</strong><br />
+....</p>
+<p> Sí, en realidad la sintaxis para un test es<br />
+<em>it</em>, el token <em>pending</em><br />
+permite definir un test sin que se ejecute. Lo bueno de usar<br />
+<em>pending</em> es que nos permite hacer en un proceso<br />
+completo, pasar de nuestras historias de usuario a código sin tener<br />
+que mantener una bitácora o agenda como en otros casos (la podéis<br />
+ver en<a href="https://github.com/amalbala"> mis katas de<br />
+TDD</a>). Es una de las cosas que más me ha gustado de Kiwi,<br />
+porque me permite tener toda la información del proyecto de una<br />
+forma explícita y dentro del IDE. La <a href="https://github.com/allending/Kiwi/wiki/Getting-Started-with-Kiwi-2.0">instalación<br />
+de Kiwi</a> es un poco larga y liosa, descargad todo lo<br />
+necesario y seguid los pasos al pie de la letra. Yo tuve algunos<br />
+problema al no cerrar xCode cuando generas los archivos de Kiwi y<br />
+por seguir <a href="https://github.com/allending/Kiwi/wiki/Up-and-Running-with-CocoaPods">estas<br />
+instrucciones</a> (que corresponden a una versión<br />
+anterior) en vez de <a href="https://github.com/allending/Kiwi/wiki/Setting-Up-Kiwi-2.x-without-CocoaPods">éstas<br />
+que son las correctas para la última versión</a>. Después de<br />
+probar el código de prueba y ver que todo está correcto podéis<br />
+empezar a usar Kiwi en vuestros proyectos con iOS</p>
+<h2>Describe y Context</h2>
+<p> La ventaja de la estructura<br />
+de bloques de Kiwi, es que puedes generar estados comunes para<br />
+todas las pruebas de un bloque (ya sea un describe o un context),<br />
+es una forma de añadir granularidad a los setting up de los test.<br />
+Así puedes añadir al código las lineas necesarias para inicializar<br />
+los contextos según necesites. Además se pueden definir nuevos<br />
+contextos anidados (dentro de otros contextos) si fuera necesario.<br />
+<code> describe(@"Con un coche", ^{
+<p style="padding-left:30px;">Coche *coche = nil; context(@"cuando<br />
+nos montamos en un coche", ^{</p>
+<p style="padding-left:60px;">beforeEach(^{</p>
+<p style="padding-left:90px;">coche = [[Coche alloc]<br />
+init];</p>
+<p style="padding-left:60px;">});</p>
+<p style="padding-left:60px;">afterEach(^{</p>
+<p style="padding-left:90px;">coche = nil;</p>
+<p style="padding-left:60px;">}); it(@"el coche debe existir",<br />
+^{</p>
+<p style="padding-left:90px;">[coche<br />
+shouldNotBeNil];</p>
+<p style="padding-left:60px;">});</p>
+<p style="padding-left:60px;">it(@"el coche debe poder arrancarse",<br />
+^{</p>
+<p style="padding-left:90px;">[coche arrancar];<br />
+[[[coche esta_arrancado] should] beYes];</p>
+<p style="padding-left:60px;">});</p>
+<p style="padding-left:30px;">});</p>
+<p> }); </code> Aquí<br />
+se pueden ver varias cosas:
+<ul>
+<li>Hemos cambiado<br />
+<em>pending</em> por <em>it</em> que es la<br />
+palabra correcta para lanzar los test. Estos test serán evaluados,<br />
+mientras que los que tengan <em>pending</em> aparecerán<br />
+siempre en verde con la palabra<br />
+<strong>Pending</strong> al final para indicar que<br />
+están por definir.</li>
+<li>Tenemos bloques<br />
+<em>beforeEach</em> y <em>afterEach</em><br />
+que definen comportamiento y cambio de estados antes y después de<br />
+cada test. Sólo se aplicarán en el nivel que estén definidos, en<br />
+este caso el contexto <em>"cuando nos montamos en un<br />
+coche"</em>.</li>
+<li>Tenemos la estructura de<br />
+los test de Kiwi: <em>[sujeto should] be_loquesea</em>,<br />
+que es una forma muy intuitiva de "resultado de la operación"<br />
+debería "ser 43". Hay que tener muy en cuenta que en Kiwi sólo<br />
+ se comparan objetos, así que si queremos comparar valores<br />
+reales, enteros o booleanos deberemos encerrarlos en un objeto,<br />
+cosa que Kiwi permite hacer de forma muy sencilla con la función<br />
+"theValue"</li>
+</ul>
+<p> <code> context(@"con un<br />
+coche arrancado", ^{
+<p style="padding-left:30px;">beforeAll(^{</p>
+<p style="padding-left:60px;">coche = [[Coche alloc]<br />
+init];</p>
+<p style="padding-left:30px;">});</p>
+<p style="padding-left:30px;">it@"Si el coche tiene de<br />
+velocidad 10 y se acelera en 20 la velocidad final ha de ser 30],<br />
+^{</p>
+<p style="padding-left:60px;">[coche<br />
+velocidad:10]; [coche acelerar:20]; [[theValue([coche velocidad])<br />
+should] equal:theValue(30)];</p>
+<p style="padding-left:30px;">});</p>
+<p style="padding-left:30px;">it@"Si el coche tiene de velocidad 30<br />
+y se frena en 10 la velocidad final ha de ser 20], ^{</p>
+<p style="padding-left:60px;">[coche velocidad:30]; [coche<br />
+frenar:10]; [[theValue([coche velocidad]) should]<br />
+equal:theValue(20)];</p>
+<p style="padding-left:30px;">});</p>
+<p> }); </code></p>
+<h1>Conclusiones</h1>
+<p> Para aplicar BDD (que es más que<br />
+recomendable) en un proyecto de iOS, os recomiendo que uséis Kiwi,<br />
+es fácil de usar, intuitiva y cubre todos los objetivos que<br />
+necesita BDD. Sin tener conocimientos previos de Objective-C no me<br />
+ha costado mucho ni instalarla, ni usarla, ni aplicarla en un<br />
+proyecto real. Hay cosas que me han gustado mucho, como lo fácil que<br />
+es empezar a usarlo, y el uso de la sentencia<br />
+<em>pending</em> para poder diferir la definición de un<br />
+test pero pudiendo pasar todas tus notas a código. Sin duda Kiwi<br />
+ayuda mucho en la adopción de BDD o en la evolución desde TDD. Yo<br />
+me he comprado el <a href="https://itunes.apple.com/us/book/test-driving-ios-development/id502345143?mt=11">libro<br />
+para iPad de Kiwi</a> que es muy completo y merece la pena<br />
+como material de referencia. Habiendo probado BDD me parece que aún<br />
+sólo siendo un cambio de expresividad aporta mucho tanto en la<br />
+concepción del proyecto como en el mantenimiento o comunicación<br />
+futura. Si os dais cuenta en este ejemplo ficticio de los coches no<br />
+hemos escrito ni una linea de código de la aplicación, pero al<br />
+tener que definir los test, darle nombres explicativos y pensar en<br />
+cómo vamos a llamar a las funciones y con qué parámetros, nos hemos<br />
+preparado para poder escribir el código que cumpla con nuestros<br />
+test y tomado decisiones de diseño (nombre de las clases, funciones<br />
+necesarias, parámetros). Además si en un futuro necesitáis cambiar<br />
+el código de las clases o la relación entre ambas o cualquier cosa,<br />
+tenéis los test preparados para que sea cual sea el cambio que<br />
+hagáis o bien mantendrá todos los test en verde (poco probable) o<br />
+estos os indicarán de forma sencilla, explicativa y comprensible<br />
+qué parte del código ha cambiado de comportamiento y en qué medida.<br />
+Esa es la potencia y objetivo de BDD, ayudarnos a desarrollar<br />
+código de calidad, fácil de mantener y fácil de cambiar o extender.<br />
+Espero no haberos cansado mucho y tampoco haberme quedado corto.<br />
+Ojalá os sirva mi experiencia para hacer mejores programas y<br />
+continuar aprendiendo, como dice el incombustible <a href="https://twitter.com/angel_m">Angel Medinilla</a><br />
+<a href="http://es.wikipedia.org/wiki/Kaizen">KAIZEN</a>!!!<br />
+Referencias: Para mi proyecto yo he usado las siguiente<br />
+referencias:
+<ul>
+<li><a href="http://www.dirigidoportests.com/el-libro">Diseño ágil con<br />
+TDD</a>, libro de <a href="http://www.carlosble.com/">Carlos Blé</a></li>
+<li><a href="http://iwt2-javierj.tumblr.com/">La luna<br />
+ilumina Igual a Culpables e Inocentes</a>. el Blog de <a href="https://twitter.com/iwt2_javier">Javier<br />
+Gutierrez</a></li>
+<li><a href="http://es.scribd.com/doc/137055522/Desarrollo-Dirigido-por-Pruebas-Practico">Dirigido<br />
+por Pruebas Práctico</a>, el libro <a href="http://pretotyping.blogspot.com.es/2012/03/pretotipar-esto-pretotyping-goes.html">pretotipado</a><br />
+por <a href="https://twitter.com/iwt2_javier">Javier<br />
+Gutierrez</a></li>
+<li><a href="http://davemeehan.com/technology/unit-testing/test-and-behaviour-driven-development-on-ios-with-kiwi#Telling_a_Story_BDD_Style">Test<br />
+and Behaviour Driven Development on iOS with Kiwi</a> de Dave<br />
+Meehan</li>
+<li><a href="https://github.com/allending/Kiwi">La página oficial de<br />
+Kiwi</a> con la guia de instalación, documentación y lista de<br />
+expectations</li>
+<li><a href="https://itunes.apple.com/us/book/test-driving-ios-development/id502345143?mt=11">El<br />
+libro electrónico Test Driving iOS Development with<br />
+Kiwi</a> de Daniel H. Steinberg</li>
+</ul>

@@ -1,0 +1,49 @@
+---
+layout: post
+title: Buenas herramientas para ASP .NET MVC
+date: 2013-12-15 23:20:58.000000000 +01:00
+type: post
+published: true
+status: publish
+categories:
+- .NET
+- Agile
+- BDD
+- Development
+- TDD
+tags: []
+meta:
+  _edit_last: '38291848'
+  _publicize_pending: '1'
+author:
+  login: virtualminder
+  email: amalbala@gmail.com
+  display_name: AM Albalá
+  first_name: ''
+  last_name: ''
+---
+<p style="text-align:center;"><a href="http://virtualminder.files.wordpress.com/2013/12/blogging-software-tools.jpg"><img class="alignnone size-full wp-image-298" alt="Workers" src="{{ site.baseurl }}/assets/blogging-software-tools.jpg" width="400" height="300" /></a></p>
+<p>Al principio pensé en titular el post "Herramientas imprescindibles en ASP .NET MVC", pero dándole un par de vueltas, está claro que éstas son las herramientas que a mi me han funcionado y siendo sinceros puede que no sean las mejores y que no sean imprescindibles, así que lo dejaremos en herramientas que me hacen la vida más fácil cuando programo en ASP .NET MVC.</p>
+<p><!--more-->Una cosa que quiero dejar clara es que me cuesta mucho instalar paquetes adicionales en los entornos de programación. He sufrido en mis carnes el utilizar una u otra herramienta/API/extensión y luego que ésta sea un freno para su evolución, instalación o portabilidad. Intento ser lo más pragmático en mi programación posible y utilizar sólo aquellas herramientas que aportan valor y ayudan en tareas tediosas, siendo siempre posible eliminarlas y hacerlo a mano sin mucha complicación.</p>
+<p>Mis buenas herramientas para ASP .NET MVC son:</p>
+<ol>
+<li><a href="http://automapper.org/">Automapper</a>; como herramienta de mapeo de clases y objetos.</li>
+<li><a href="http://www.ninject.org/">Ninject</a>: inyector de dependencias</li>
+<li><a href="https://github.com/Moq/moq4">Moq</a>: generador de mocks</li>
+<li><a href="http://www.specflow.org/">Specflow</a>: Generación de test BDD usando el lenguaje Gherkin.</li>
+</ol>
+<p>Cada uno soluciona uno de los problemas a los que me enfrento con frecuencia cuando hago un proyecto y la mayoría tienen que ver con el desacoplamiento entre clases y los test.</p>
+<p>1. <a href="http://automapper.org/">Automapper</a></p>
+<p><a href="http://automapper.org/">Automapper</a> es una herramienta para el mapeo de clases, es decir, me permite transformaciones de una clase a otra de forma estructurada y centralizada. Las principales ventajas son desacoplar la clase origen y destino y en concreto poder conectar de forma sencilla las clases que representan a objetos de datos (BD, EF, AR) con las clases de dominio.</p>
+<p>Yo la utilizo principalmente para transformar las clases que genera Entity Framework desde las tablas de la BD (Model First) en sus correspondientes clases de dominio.  Como transformar PacienteBD en Paciente o Estudios en Exploraciones. Es muy intuitivo definir los mapers de forma global y luego aplicarlos en las funciones de los repositorios de datos.</p>
+<p>¿Por qué utilizar <a href="http://automapper.org/">Automapper</a> en vez de una Fachada o un Adaptador? Pues por dos cosas principalmente: soporta colecciones y soporta estructura de Linq (IQueryable) lo que permite que las consultas de BD no se realicen hasta que se necesiten sus resultados. Si fuera necesario se podrían hacer de forma manual los mapeos y sacrificar rendimiento, pero sin perder funcionalidad en el tema de estructuras de datos y estructuras de Linq, pero ahora me soluciona mucho la conexión entre clases y de una forma sencilla, expresiva y limpia.</p>
+<p>2. <a href="http://www.ninject.org/">Ninject</a></p>
+<p>Una necesidad que siempre tengo que cubrir es la inyección de dependencias. Desde el principio de cualquier aplicación es necesario poder invertir el control e intentar que las clases usen interfaces y no otras clases, de una forma u otra esto exige que haya herramientas que resuelvan estas dependencias. Para .NET hay varias alternativas como <a href="http://msdn.microsoft.com/en-us/library/dn223671(v=pandp.30).aspx">Unity</a>, pero la verdad es que la simplicidad y sobre todo lo fácil que es explicar cómo funciona a alguien que nunca antes lo ha visto, me ha hecho decantarme por <a href="http://www.ninject.org/">Ninject</a> (también que la documentación es más directa que la de Unity).</p>
+<p>La usamos para inyectar casi todo, pero en concreto los repositorios de datos y clases validadoras son típicos objetivos de la inversión de dependencias.</p>
+<p>3. <a href="https://github.com/Moq/moq4">Moq</a></p>
+<p>Seguramente la herramienta más conocida para definir <a href="http://martinfowler.com/articles/mocksArentStubs.html">Mocks</a>. Los Mocks son esenciales a la hora de hacer test y simular la existencias de comportamiento al que no se tiene acceso como BD, archivos, apis de terceros, etc. Junto con Ninject permite definir buenos tests independientes y rápidos.</p>
+<p>4. <a href="http://www.specflow.org/">Specflow</a></p>
+<p>De un tiempo a esta parte he estado trabajando con el concepto de <a href="http://dannorth.net/introducing-bdd/">BDD </a>que me ha permitido enfocar de forma más natural <a href="http://en.wikipedia.org/wiki/Test-driven_development">TDD</a> a nivel de aplicación, la transición entre historias de usuario a test es más natural y la jerarquía de tests por funcionalidad o <em>feature</em> más intuitiva. Es sin duda la herramienta de las anteriores que más me ha costado aprender y sacarle partido, pero quizás ahora es la que más necesitaría y menos podría eliminar de las anteriores. No podría hacer a mano lo que hago con <a href="http://www.specflow.org/">Specflow</a>, aunque reconozco que hay veces que hago <a href="http://en.wikipedia.org/wiki/Test-driven_development">TDD</a> desde test unitarios cuando me es más fácil empezar por ellos.</p>
+<p><a href="http://www.specflow.org/">Specflow</a> define una estructura Given/When/Then (<a href="http://www.specflow.org/documentation/Using-Gherkin-Language-in-SpecFlow/">lenguaje Gherkin</a>) en lenguaje natural (inglés) que posteriormente aplicando unas reglas muy sencillas de entender genera los esqueletos de los test correspondientes en la librería de test unitarios que quieras. La integración con el entorno de programación de VS2013 es total y su configuración y uso tiene cierta curva de aprendizaje pero luego cuando entiendes el lenguaje y las características se entiende y es sencillo de aplicar.</p>
+<p>En este post he hablado de herramientas externas que aconsejo usar en proyectos de ASP .NET MVC, la mayoría están relacionadas con el desacople entre clases, los test y el intentar hacer código de calidad y limpio. Creo que sea cual sea vuestro proyecto o lenguaje, las ideas en las que se apoyan estas herramientas os ayudarán a hacer mejor código. Os animo a que las uséis en vuestros proyectos y descubráis sus análogas en otros lenguajes.</p>
+<p>En otros post me gustaría hablar de TFS o VisualStudio Online, pero como estoy en el periodo de prueba de la versión completa y además quiero profundizar más en la plataforma, lo dejaré para más adelante.</p>

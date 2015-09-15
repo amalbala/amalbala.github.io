@@ -1,0 +1,37 @@
+---
+layout: post
+title: Sublime Text 2 configurado para TDD en C++
+date: 2012-07-28 00:23:23.000000000 +02:00
+type: post
+published: true
+status: publish
+categories:
+- Development
+- Sublime Text
+- TDD
+tags: []
+meta:
+  _edit_last: '38291848'
+author:
+  login: virtualminder
+  email: amalbala@gmail.com
+  display_name: AM Albalá
+  first_name: ''
+  last_name: ''
+---
+<p>Hace un par de semanas descubrí un nuevo editor de texto orientado a la programación <a title="Sublime Text" href="http://www.sublimetext.com/">Sublime Text</a>. La primera información vino del blog <a title="Genbeta" href="http://www.genbeta.com/">Genbeta</a>, pero reconozco que no le hice mucho caso, primero porque actualmente estoy algo alejado de la programación comercial y porque soy reticente al cambio de las herramientas que conozco. El verdadero interés vino de rebote, un retweet de <a href="http://www.carlosble.com/">Carlos Ble</a> sobre un webcast de Sublime Text 2 en <a href="http://www.desarrolloweb.com/">desarrolloWeb</a> a cargo de Javier Jiménez Villar (CEO de tapquo y creador de <a href="http://tapquo.com/">LungoJS</a>), esa combinación de talentos (Carlos y Javier) hizo que mi interés aumentase y me propuse ver el webcast.</p>
+<p>Un 10 para Javier, me enganchó desde el primer momento y aunque parezca una chorrada, fueron dos cosas las que me hicieron bajármelo y probarlo: la apariencia de la interfaz y la seguridad con que Javier decía que era genial (y <a href="https://github.com/soyjavi/Kinout">Kinout</a> otro 10 para Javier).</p>
+<p>Reconozco que no me resultó difícil pillarle el truco, yo no he usado mucho VIM porque soy un desastre con los atajos de teclado (memoria de pez) pero mi entorno de programación desde hace mucho tiempo ha sido Notepad++ en windows y Anjuta en Linux. Acabé harto de MS Visual Studio, Netbeans y Eclipse y de tener que aprender la rueda una y otra vez sin que ello aumentase mi productividad.</p>
+<p>Bueno me imagino que queda claro: Os recomiendo 100% a todo programador que le dé un tiento a Sublime Text 2, tiene su curva de aprendizaje pero con los <a href="http://www.desarrolloweb.com/en-directo/sublime-text2-en-vivo-7185.html">webcast</a> de desarrolloweb queda cercana a cero.</p>
+<p>Otro de los temas en los que me estoy auto formando es en TDD, todo por culpa de Carlos Ble y su libro, es uno de esos temas que oyes pero crees que te quedan lejanos. Nada más lejos de la realidad, creo que cualquier programador serio debe intentar adquirir TDD para su dia a dia y ya os digo que yo vengo del campo que todo el mundo pone como ejemplo de que no se puede usar TDD, aplicaciones gráficas con OpenGL. Además es una forma sencilla de luego generalizar con XP que es otro de los temas en los que me estoy formando y que actualmente más me apasionan.</p>
+<p><!--more--></p>
+<p>Confieso que mi experiencia actual en TDD se reduce a los ejemplos del libro de Carlos pero he sentido una sensación de alivio, control y seguridad al realizarlos que es complicado de rechazar, lo más difícil es ser constante en el método, porque parece que vas más lento, pero no es así, lo primero es que te obliga a plantearte cosas antes de escribir código, segundo te obliga a ser conciso y concreto sin pensar en el futuro o el pasado y por último para gente como yo discontinúa en la programación me permite saber en todo momento dónde estoy.</p>
+<p>Intenté matar dos pájaros de un tiro: realizar los ejemplos del libro de Carlos en Sublime Text con C++, a ver que tal. Como framework o libreria de test yo he usado <a href="http://code.google.com/p/googletest/">googletest</a> ¿por qué? pues leyendo un poco de StackOverflow y algunas sugerencias me pareció lo más sencillo de incorporar. Como compilador he usado gcc, pero me estoy planteando pasarme a Clang por culpa de Sublime Text, pero esa es otra historia. Y manos a la obra.</p>
+<p>Al realizar el primer ejemplo o bateria de ejemplos me quedo un sabor agridulce, entendía como funcionaba TDD y me gustaba como se programaba pero era muy tedioso hacer los pasos uno a uno todo el rato (compila el test, compila el código, ejecuta los test si todo verde genial si no a currar) aún usando los atajos de teclado era un rollo. La solución a mi problema fue integrar los dos Makefiles para que hicieran todo los pasos automaticamente al construir.</p>
+<blockquote><p>all: $(MAIN) $(TEST) executeTest</p></blockquote>
+<p>Eso me puso contento durante un tiempo, pero la verdad es que tenía que compilar todo el rato, a cada cambio, compilaba para probar los test y pensaba en que sería genial poder automatizar eso, más aún porque Sublime Text no tiene análisis estático del código.</p>
+<p>Entonces la iluminación vino a mi en el segundo webcast sobre Sublime Text de desarrolloweb: el paquete SublimeOnSaveBuild. Primero hice una chorrada que fue asociar la construcción al Makefile, así cuando salvaba el Makefile se reconstruía todo: utilidad nula, afortunadamente fun un poco más lejos, asociando la reconstrucción a los ficheros .cpp, ahora en cuanto salvo algún archivo de código fuente, se recompila todo lo que haya que recompilar y se lanzan los test, así que estoy permanentemente machacando el programa a base de test.</p>
+<p>Estoy contento por haber descubierto un nuevo programa que realmente mejora mi productividad, Sublime Text, hasta límites insospechados (lo uso incluso para mis documentos Latex). Y merece la pena aportar al proyecto. Y también que me haya hecho la transición o aprendizaje de TDD más efectiva.</p>
+<p>Espero que os animéis a seguir el proyecto, a la gente tan increíble que me hicieron llegar a él (Carlos y Javier) y también que os adentréis en el apasionante y productivo mundo del TDD.</p>
+<p>Por último decir que Sublime Text es gratis con un insistente mensaje de que pagues la licencia pero 100% funcional y que el programa vale cada uno de los 48 euros que vale la licencia.</p>
+<p>P.D. Después he descubierto otro paquete que me permite el análisis de código conforme escribes SublimeClang y también SublimeAStyleFormatter para que el código quede bonito.</p>

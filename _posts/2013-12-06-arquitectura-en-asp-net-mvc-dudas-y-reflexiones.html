@@ -1,0 +1,51 @@
+---
+layout: post
+title: Arquitectura en ASP .NET MVC - Dudas y reflexiones
+date: 2013-12-06 12:49:03.000000000 +01:00
+type: post
+published: true
+status: publish
+categories:
+- .NET
+- BDD
+- Development
+- TDD
+tags: []
+meta:
+  _edit_last: '38291848'
+  _publicize_pending: '1'
+author:
+  login: virtualminder
+  email: amalbala@gmail.com
+  display_name: AM Albalá
+  first_name: ''
+  last_name: ''
+---
+<p>Estoy en un proyecto .NET que está siendo toda una experiencia personal profesional. Me estoy enfrentando a muchos retos y problemas y uno de los primeros y que no ha terminado es la definición de la Arquitectura.</p>
+<p><!--more--></p>
+<p>Voy a poner varios conceptos sobre la mesa:</p>
+<ul>
+<li>Suelo tener muchas dudas y cambios de opinión sobre organización y estructura de las aplicaciones.</li>
+<li>Me gusta ver evolucionar la aplicación y dilatar cuestiones no claras hasta que se hagan claras</li>
+<li>No considero que la arquitectura ha de ser constante.</li>
+<li>No me incomoda estar muy seguro de una decisión en un momento dado y cambiar porque las condiciones del programa lo requieran.</li>
+</ul>
+<p>Por todo ello, y para poder adaptarme al cambio de forma constante, me gusta mucho la separación por capas y el uso intensivo de patrones, ello me dota de la flexibilidad y control que necesito, independientemente de los cambios.</p>
+<p>En concreto en .NET tengo actualmente tres proyectos independientes: Web, Dominio y Tests. Ya estoy atisbando que seguramente necesite refactorizar Dominio y dividirlo en Datos y Dominio, pero por ahora la capa es demasiado delgada.</p>
+<p>En cada uno de estos proyectos llevo a cabo la parte de interacción (Web),  la lógica de negocio y <a href="http://msdn.microsoft.com/es-es/data/ef.aspx">EntityFramework</a> (Dominio) y los Test que me van soportando el código. La separación en proyectos me da las siguientes ventajas:</p>
+<ol>
+<li>Las dependencias son explícitas. El dominio no depende de nadie y los otros dos dependen del dominio.</li>
+<li>Puedo trabajar en uno de los proyectos sin tener que recompilar toda la solución.</li>
+<li>El dominio lo puedo conectar con otros proyectos o software de terceros usando la DLL.</li>
+</ol>
+<p>En la parte de Web, aplico <a href="http://es.wikipedia.org/wiki/Modelo_Vista_Controlador">el patrón MVC</a> (es muy muy sencillo con toda la operativa que ya tiene .NET)  y por ahora es suficiente para la mayoría de la operativa. También tengo un directorio denominado Infraestructuras que engloba a aquellas funciones transversales que se aplican a todos lo elementos del proyecto (son los filters de .NET en concreto autorización y autentificación)</p>
+<p>En la parte de Dominio tengo separadas las entidades de negocio de las entidades de <a href="http://msdn.microsoft.com/es-es/data/ef.aspx">EF</a>. Lo hago así por dos motivos principales:</p>
+<ol>
+<li>Poder establecer otros mecanismos de acceso a datos que no sean a través de EF.</li>
+<li>Si tengo que actualizar las entidades de EF desde la BD por el motivo que sea no quiero que tenga repercusiones en el resto del proyecto.</li>
+</ol>
+<p>La entidades de negocio se comunican con la BD a través del patrón Repositorio que hace uso de los objetos generador por EF. Para mapear los objetos EF en objetos de la lógica de negocio uso <a href="http://automapper.org/">Automapper</a> que he de reconocer que es sencillo y eficiente, me encanta que se puedan mapear colecciones y también objetos <a href="http://msdn.microsoft.com/es-es/library/bb397926(v=vs.110).aspx">Linq (IQueryable)</a>.</p>
+<p>Actualmente no uso contenedores de <a href="http://es.wikipedia.org/wiki/Inyecci%C3%B3n_de_dependencias">DI</a>, pero porque estoy mirando las diferencias entre <a href="https://unity.codeplex.com/">Unity</a> y <a href="http://www.ninject.org/">Ninject</a>, pero tengo las clases desacopladas con interfaces y un constructor de dependencias, no será difícil introducir los contenedores de DI.</p>
+<p>Los objetos de negocio, son versiones reducidas de los de la BD pero eso es bueno, porque reduce complejidad y permite crecer con cabeza (muchos de los campos de la BD tiene dudosa utilidad o están obsoletos).</p>
+<p>En la parte de los test tengo los test unitarios y pruebas preliminares con <a href="http://www.specflow.org/">SpecFlow</a>, todavía no tengo integrado Selenium, pero me parece que voy a tener que añadirlo para poder cubrir todo con test. Los test están siendo un problema nada más empezar, porque no todo el equipo los entiende y no los respeta. De todas maneras esto es un cambio de mentalidad y ahora mismo yo me encargo de intentar cubrir todo el código con test unitarios, yo uso TDD y eso cubre muy bien el código de forma natural, pero hacer test al final y con código de dudosa calidad se hace complicado y tedioso y reconozco que a veces es un trabajo que no me agrada.</p>
+<p>En otro post me gustaría hablar de infraestructura, porque estoy usando <a href="http://en.wikipedia.org/wiki/Team_Foundation_Server">TFS</a> + GIT con builds continuos y es algo muy potente y  sencillo, incluso aunque utilices librerías de terceros. También me gustaría hacer otro post sobre autentificación y autorización porque está suponiendo un quebradero de cabeza para la aplicación.</p>

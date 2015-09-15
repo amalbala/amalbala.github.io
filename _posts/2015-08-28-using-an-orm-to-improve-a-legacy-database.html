@@ -1,0 +1,44 @@
+---
+layout: post
+title: Using an ORM to improve a legacy database
+date: 2015-08-28 21:47:07.000000000 +02:00
+type: post
+published: true
+status: publish
+categories:
+- .NET
+- Development
+tags: []
+meta:
+  _wpcom_is_markdown: '1'
+  _edit_last: '38291848'
+  geo_public: '0'
+  _publicize_job_id: '14199024381'
+author:
+  login: virtualminder
+  email: amalbala@gmail.com
+  display_name: AM Albalá
+  first_name: ''
+  last_name: ''
+---
+<p><a href="https://virtualminder.files.wordpress.com/2015/08/ormmapping.png"><img class="size-full wp-image-311 aligncenter" src="{{ site.baseurl }}/assets/ormmapping.png" alt="ORMMapping" width="700" height="359" /></a></p>
+<p>Some days ago I read the post from <a href="http://codurance.com/2015/08/17/increasing-complexity-one-entity-at-a-time/">codurance ncreasing complexity one entity at a time</a> and on another discusion with <a href="https://twitter.com/antonio_albala/status/637357946419191808">@gulnor &amp; Co</a> about decoupling and ORM.</p>
+<p>In both cases the ORM is used as a smell or antipattern. I can understand this opinion because I have read it on many other sources (Uncle Bob, etc.)</p>
+<p>I just want to explain why we have chosen use an ORM and how we use it. We use it to decouple our system from a legacy database.</p>
+<p><!--more--></p>
+<p>Our database is:</p>
+<ul>
+<li>really old and growing like a monster.</li>
+<li>in production and used by other system, so is not modifiable.</li>
+<li>has bad associations or not associations at all.</li>
+<li>bad designed so the tables are not related to domain entities.</li>
+</ul>
+<p>So we need to use it but we don't want to contaminate our system with the data base problems. What can we do to keep my persistence model aligned with our domain model but being able to store on our legacy DB? Our answer was use an ORM, in this case Entity Framework.</p>
+<p>To be honest, our EF model is far away from our database estructure. We invest much time trying to get the entities we want from the tables we have.</p>
+<p>Some transformations we made on our ORM:<br />
+- Associations that were not defined on the database are defined on the ORM.<br />
+- We merge two tables, that represent the same entity, on only one and use internal flags and procedures to keep the storing process on two tables.<br />
+- Use hierarchies on EF to split a table into two entities.</p>
+<p>The good thing is that changing the ORM model is really easy, we can change a 1-N association to a N-M in seconds. Changing the names of a entity or property to align it to the domain model is trivial. We define what we need and use the ORM to transform the table structure on our entities.</p>
+<p>Of course there are some limitations like remove an existing association on the database, but nothing is perfect, isn't it? to be honest I would prefer that the association where defined on the ORM and not on the database, because the association could change over time and the ORM is easier to modify than the database.</p>
+<p>For us, the ORM keeps us decoupled from our database that we can not change, but it helps us to dream in a future data base more aligned to our domain model. Maybe when our database was as we want it to be, the ORM is no longer needed, but this will be another history.</p>

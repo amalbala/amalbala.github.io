@@ -1,0 +1,55 @@
+---
+layout: post
+title: Conectando Django 1.5.3 + Python 3.3 + MySQL en Windows 8. Un arreglo y listo
+date: 2013-09-12 23:15:37.000000000 +02:00
+type: post
+published: true
+status: publish
+categories:
+- Development
+- Django
+tags:
+- django
+- python
+meta:
+  _edit_last: '38291848'
+  _publicize_pending: '1'
+  twitter_cards_summary_img_size: a:7:{i:0;i:333;i:1;i:151;i:2;i:2;i:3;s:24:"width="333"
+    height="151"";s:4:"bits";i:8;s:8:"channels";i:3;s:4:"mime";s:10:"image/jpeg";}
+  _oembed_7bcdbd266e2122eb627e4575606eab75: '{{unknown}}'
+  _oembed_7469eac9909e44dcd98d91500b18bac3: '{{unknown}}'
+author:
+  login: virtualminder
+  email: amalbala@gmail.com
+  display_name: AM Albalá
+  first_name: ''
+  last_name: ''
+---
+<p><a href="http://virtualminder.files.wordpress.com/2013/09/descarga.jpeg"><img class="alignnone  wp-image-270" alt="descarga" src="{{ site.baseurl }}/assets/descarga.jpeg" width="200" height="91" /></a><img class="alignnone  wp-image-269" alt="descarga (2)" src="{{ site.baseurl }}/assets/descarga-2.jpeg" width="205" height="89" /><img class="alignnone  wp-image-268" alt="descarga (3)" src="{{ site.baseurl }}/assets/descarga-3.jpeg" width="187" height="97" /></p>
+<p>Hoy quiero compartir con vosotros un tema más técnico. Igual para otros es trivial pero a mi me ha supuesto media mañana centrado es este problema.</p>
+<p>El tema es que estoy probando alternativas para realizar una aplicación web corporativa y tenía muchas ganas de ver como funcionaba Django, así que me puse manos a la obra.</p>
+<p><!--more--></p>
+<p>El tema no es muy complicado, yo me puse como objetivo montar algo web con Django usando base de datos MySQL, para comprobar qué se puede hacer.</p>
+<h3>MySQL</h3>
+<p>Como no tenía ningún servidor disponible y mi S.O. del trabajo es Windows 8, para instalar MySQL opté una solución WAMP, en concreto la de <a href="http://www.wampserver.com/en/">WampServer</a>. Se instala fácilmente y tienes PHP, MySQL, Apache y phpadmin así que todo listo.</p>
+<h3>PHP</h3>
+<p>Bueno pues igual de sencillo, lo único es que cuando vas a la página de <a href="https://docs.djangoproject.com/en/1.5/intro/install/">Django</a> te aconseja instalar la versión 2.7 aunque también soporta experimentalmente 3.3. En <a href="http://www.python.org/download/">Python</a>, también considera ambas versiones como estables. Como quería probar algo que haré en el futuro, me decidí sin pensarlo por la versión 3.3, seguramente será la versión oficial en no mucho tiempo.</p>
+<h3>Django</h3>
+<p>Y por fin me instalo <a href="https://docs.djangoproject.com/en/1.5/intro/install/">Django</a> y empiezo el <a href="https://docs.djangoproject.com/en/1.5/intro/tutorial01/">tutorial</a>. Sorpresa, en caso de no utilizar SQLite, tienes que establecer un conector para la bases de datos, y aquí empieza lo complicado, no hay conector definido que vincule PHP 3.3 con Django y con MySQL. Hay algunos intentos como:</p>
+<ul>
+<li><a href="http://sourceforge.net/projects/mysql-python/">MySQL for Phyton</a>: No soporta Python 3.3.</li>
+<li><a href="https://github.com/clelland/MySQL-for-Python-3">MySQL for Phyton-3</a>: que no es fácil instalarlo en Windows (hay que instalar CygWin, etc) además no hay documentación y otro problema es que el proyecto parece muerto, hace dos años que no hay cambios.</li>
+<li><a href="https://github.com/jerith/connector-django-mysql">connector-django-mysql</a>: hace tres años que no cambia y además con versiones antiguas de Django</li>
+</ul>
+<p>Nada, no conseguía conectar Django con MySQL. Buscando, encontré <a href="http://python.6.x6.nabble.com/Recommending-a-Python-3-compatible-MySQL-connector-td5016079.html">este interesante hilo</a> sobre el mismo tema, aunque encuadrado en la próxima versión de Django. En ese hilo se plantean distintas alternativas y se concluye que el más adecuado es un plugin oficial desarrollado por MySQL, dentro de python 3 (<a href="https://pypi.python.org/pypi/mysql-connector-python/1.0.9">https://pypi.python.org/pypi/mysql-connector-python/1.0.9</a>)  o dentro de MySQL <a href="http://dev.mysql.com/doc/connector-python/en/index.html">http://dev.mysql.com/doc/connector-python/en/index.html</a>.</p>
+<p>De forma totalmente fortuita, resulta que la versión 1.1.1 del conector, tiene un<a href="http://dev.mysql.com/doc/connector-python/en/connector-python-django-backend.html"> backend para Django</a>!. Es importante saber que la <a href="http://dev.mysql.com/downloads/connector/python/">versión estable del conector es la 1.0.12</a> y que la que tiene el <a href="http://dev.mysql.com/downloads/connector/python/">porting de Django es la 1.1.1 </a> (pestaña development release). Digo que he tenido mucha suerte porque la versión 1.1.1 que tiene el porting de Django fue puesta para probar ayer! como su desarrollador <a title="View all posts by Geert Vanderkelen" href="http://geert.vanderkelen.org/">Geert Vanderkelen</a> comunicaba en <a href="http://geert.vanderkelen.org/mysql-connector-python-1-1-1a/">su blog</a>.</p>
+<p>Bueno, todo resuelto, pero no. Cuando me disponía a probar mi conector recién sacado del horno, resulta que no funcionaba, al lanzar</p>
+<p><code>python manage.py syncdb</code></p>
+<p>Me devolvía el error:</p>
+<p><code>AttributeError: 'str' object has no attribute 'decode'</code></p>
+<p>Primero hice lo más sencillo y vago: comentario al desarrollador, "pasa esto y no me funciona ¿qué puede ser?¿qué puedo hacer?". Pero reconozco que no tengo paciencia, ¡era sólo un error! y el mensaje parecía bastante explicativo. Así que abrí los archivos de código fuente en el sublime y me puse a buscar dónde estaría ese decode que no me dejaba continuar.<br />
+Encontré el problema y la solución de forma lateral en <a href="http://stackoverflow.com/questions/5445250/string-in-python-with-my-unicode">este hilo</a>. Así que elimino la función decode y pruebo. Voilá! todo va como la seda.</p>
+<p>Ya lo tengo todo, Django + Django backend + pequeño fix + (mysql-connector-python) + Python 3.3 + MySQL.</p>
+<p>Como no tengo mucha idea de Python, <a href="http://geert.vanderkelen.org/mysql-connector-python-1-1-1a/">le he mandado el fix al autor del conector</a> para confirmar que no había destruido nada y parece que es correcto (comentarios al final).</p>
+<p>Espero que si te has visto en el mismo caso que yo, mi experiencia te pueda ayudar.  Y también espero haberme explicado bien.</p>
+<p>Hay días que mola mucho ser desarrollador de software.</p>
