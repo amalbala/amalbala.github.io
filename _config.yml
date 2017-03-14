@@ -3,15 +3,15 @@
 # # # # # # # # # # # # #
 
 # Basic
-name:               "AMAlbala"
+name:               "AMAlbala's blog'"
 
 author:
-  facebook:         your-id
+  
   twitter:          am_albala
   github:           amalbala
-  linkedin:         your-id
+  linkedin:         antoniomartinezalbala
   medium:           amalbala
-  tumblr:           your-id
+  aboutme:          amalbala
   email:            amalbala@gmail.com
 
 copyright:
@@ -24,7 +24,7 @@ google-analytics:
 
 # Disqus
 disqus:
-  id:               "amalbala"
+  id:               "am_albala"
 
 # URL
 url:                "https://amalbala.github.io" # the base hostname & protocol for your site
@@ -37,7 +37,7 @@ timezone:           Europe/Madrid
 permalink:          /:day-:month-:year/:title/
 
 # Pagination
-paginate:           5
+paginate:           10
 paginate_path:      /page:num/
 
 # Markdown

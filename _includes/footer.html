@@ -29,6 +29,9 @@
     {% if site.author.email %}
     <a href="mailto:{{ site.author.email }}"><i class="fa fa-envelope" aria-hidden="true"></i></a>
     {% endif %}
+     {% if site.author.aboutme %}
+    <a href="https://medium.com/{{ site.author.aboutme }}"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+    {% endif %}
 
   </div>
   © {{ site.copyright.year }} {{ site.copyright.name }}. All rights reserved.
