@@ -10,7 +10,6 @@ categories:
 - Devops
 tags: []
 ---
-# Ventajas de Sistema de Publicación Azul - Verde (Blue - Green)
 
 En nuestro proyecto actual, hemos montado un sistema de publicación basado en el enfoque [azul - verde propuesto por Martin Fowler][1].
 
