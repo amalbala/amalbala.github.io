@@ -1,5 +1,5 @@
 ---
-title: About
+title: About Me / Sobre mi
 permalink: /about/
 ---
 
