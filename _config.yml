@@ -48,13 +48,13 @@ kramdown:
 # Navigation
 nav:
   - name:           "About"
-    url:            "/about"
+    url:            "https://about.me/amalbala"
   - name:           "Archive"
     url:            "/archive"
   - name:           "Tags"
     url:            "/tags"
   - name:           "Github"
-    url:            "https://amalbala.github.io"
+    url:            "https://github.com/amalbala"
 
 # Sass
 sass:
