@@ -5,10 +5,7 @@ date: 2017-03-01 21:47:07.000000000 +02:00
 type: post
 published: true
 status: publish
-categories:
-- Deployment
-- Devops
-tags: []
+tags: [Deployment,Devops]
 ---
 
 En nuestro proyecto actual, hemos montado un sistema de publicación basado en el enfoque [azul - verde propuesto por Martin Fowler][1].
