@@ -13,7 +13,7 @@ No sé si os encontráis en la misma situación o tenéis pensado hacerlo, en cu
 
 He hecho una comparación con patrones, porque me ha parecido chulo (nivel de originalidad -1) y por ordenar un poco las ideas.
 
-## 1 No hay dos Team Leaders iguales, al igual que no hay dos equipos iguales. Patrón Adaptador
+## 1. No hay dos Team Leaders iguales, al igual que no hay dos equipos iguales. Patrón Adaptador
 
 _Be water my friend_, es genial leer muchos libros y compartir con mucha gente, pero cada equipo es un mundo y tiene sus peculiaridades, siempre, siempre, siempre, tienes que ser tú el que se adapte al equipo y no al revés. Si vas de primeras con tus ideas de: "Genial ya soy jefe! ahora todas las cosas se harán bien, como se tiene que hacer!" Cagada total.
 
@@ -23,7 +23,7 @@ Cada uno tenemos una personalidad diferente y además esta personalidad cambia c
 
 Adáptate, cambia, redefine tu rutina de trabajo, cambia el foco, siempre intenta que el flujo siga al equipo y no al revés. No tengas prácticas inamovibles, no seas dogmático. 
 
-## 2 El Equipo es tu razón de ser. Hazlo parte de tu trabajo. Patrón Comunicador
+## 2. El Equipo es tu razón de ser. Hazlo parte de tu trabajo. Patrón Comunicador
 
 Una cosa clara: __Eres un responsable de equipo porque hay un EQUIPO__. No un grupo de profesionales, no un espacio, ni un proyecto detrás, hay un equipo. Si no hay equipo, no hay nada que liderar, tú sobras, así de claro.
 
@@ -41,7 +41,7 @@ No trates a tu equipo como si fueran mas pequeños o tontos que tú, padres tene
 
 Todo el equipo es profesional y adulto, trátalos como tales. Juntos podéis buscar la solución o alternativas pero siempre si trabajais con la misma información.
 
-## 3 Cómete más mierda de perro que el resto. Patrón Fachada 
+## 3. Cómete más mierda de perro que el resto. Patrón Fachada 
 
 Sueles ser el que tiene más información dentro del equipo y además un criterio y una confianza mayor por parte de todos los integrantes de la empresa, tanto dentro del equipo como fuera. Las mierdas grandes te las comes tú, así de cristalino.
 
@@ -51,13 +51,13 @@ Si hay un comportamiento inadecuado, se carga con las consecuencias y se ponen l
 
 No vale lo de los marrones para el equipo y los premios para mi. __Team player always__. No porque sea guai, adecuado, moral o ético, si no porque es la única forma de que el equipo haga su trabajo lo más eficiente y eficaz posible y aporte valor en cada entrega y esa es tu vara de medir.
 
-## 4 No te obsesiones en conocer cada línea del proyecto. Patrón Delegate
+## 4. No te obsesiones en conocer cada línea del proyecto. Patrón Delegate
 
 Esta claro que cuando empiezas como programador y subes a responsable, tienes esa idea de controlar todo el código de forma explicita, no es práctico. Ya lo decía [Javi Santana en su post][2] (que por cierto es oro puro y si estas leyendo esto tienes que leer sí o sí), tienes que dejar de obsesionarte con controlar cada línea de código fuente y saber cómo se ha hecho todo. Confía en tu equipo y en que tu equipo te dará la información veraz y correcta cuando preguntes o tengas dudas, básicamente porque tú haces lo mismo y hay una relación de confianza bidireccional.
 
 Si no hay confianza, entonces no esperes que tu equipo te diga la verdad, te dirá lo que cree que tú quieres oir y además se guardará todo lo posible porque __el está solo contra el resto y hay que defenderse__. Evita esta situación a toda costa, acabas de perder al equipo, son solo un grupo de pistoleros solitarios en un duro y salvaje oeste empresarial.
 
-## 5 Conoce todas las parte de tu proyecto. Patron Interfaz.
+## 5. Conoce todas las parte de tu proyecto. Patrón Interfaz.
 
 Vale que no tienes que conocer cada linea de tu proyecto, pero tienes que conocer todas sus partes, por muchas razones:
 - Tienes que poder explicar, defender y criticar tu proyecto con terceros.
@@ -70,7 +70,7 @@ Para eso, a mi me funciona muy bien:
 - hacer sesiones de _pair programming_ espontáneas con algún integrante (vamos lo que se llama mover la silla).
 - en casos concretos jornadas o workshop de una hora o dos sobre un módulo, aspecto concreto de la aplicación al que le he perdido la pista.
 
-## 6 Actualízate de forma Continua e Incremental. Patron Tecnología-Vista-Controlador
+## 6. Actualízate de forma Continua e Incremental. Patrón Tecnología-Vista-Controlador
 
 Tienes que estar puesto en casi todo, sí chaval, la cosa está clara, si vas a proponer cambios, mejoras o cosas nuevas, tienes que saber de qué hablas, no te digo que te hagas experto en Angular2 o React Native, que sepas Clojure y Scala y que domines PoweShell y la configuración de active directory, pero tienes que saber qué es cada cosa, dónde va y que ventajas/inconvenientes aporta.
 
@@ -82,7 +82,7 @@ Esto te obliga a:
 
 Dedica tiempo tanto a nuevas tecnologías como a afianzar conocimientos básicos (orientación a objetos, patrones, arquitectura, algoritmia, matemática, etc.), lee blogs de interés en tu campo para conocer de primera mano las nuevas tecnologías, a mi twitter me está llendo muy bien para este tema ([y parece que no soy el único][3]).
 
-## 7 Conoce tu Negocio. Patrón Domain Driven Knowledge
+## 7. Conoce tu Negocio. Patrón Domain Driven Knowledge
 
 A menos que tu producto sea parte de un producto mayor y no tengas nada que ver en el producto final, es muy importante que conozcas el ámbito en el te mueves. 
 
@@ -92,7 +92,7 @@ Domina el lenguaje de tu ámbito, nosotros por ejemplos trabajamos en ámbitos m
 
 Sal de la zona de confort, ve a una charla sobre logística, sobre redes sociales para marketing, sobre identidad corporativa o planes estratégicos. Son parte del contexto que te rodeo y como bien dice @gulnor [_El código importa, pero el contexto más_][4]. Y ayuda a tu equipo con sus dudas sobre el negocio y al resto de integrantes de tu empresa con las dudas sobre tecnología. __Eres el embajador del conocimiento bidireccional__.
 
-## 8 Sé el escaparate de tu equipo. Patrón Proxy
+## 8. Sé el escaparate de tu equipo. Patrón Proxy
 
 Igual que eres la fachada de tu equipo, eres el escaparate. Esto supone defender y transmitir tu cultura de equipo y proyecto allá por donde quiera que vayas.
 
@@ -110,13 +110,13 @@ Si hay que decir NO a una situación que no quieres para el equipo, dilo, aunque
 
 Si llega el caso en que un integrante del equipo no aporta valor, intenta hablarlo con él, plantéale alternativas y soluciones y si, definitivamente no aporta valor al equipo ni mejora el estado, entonces déjale marchar. Claramente no quiere cambiar porque se quiere ir, solo que no se atreve, déjalo marchar, comunícaselo de forma directa y justificada y ponte en primera linea para cualquier duda o reproche que tenga, no pasa nada, es parte del día a día del equipo. Tu objetivo es todo el EQUIPO no un integrante en particular.
 
-## 9 Empatía. Eres un cambiapieles. Patrón Polimorfismo.
+## 9. Empatía. Eres un cambiapieles. Patrón Polimorfismo.
 
 Ponte en la situación de todo el mundo, entiende al jefe cuando no se cumplen los plazos, al usuario que se estresa cuando la aplicación se cuelga, al programador que no sabe qué tarea es la que tiene que hacer y al de soporte que tiene un mal día. Todos son tú, haz lo que puedas para mejorar la relación de el equipo con todo el mundo. Toma las riendas y da todas la explicaciones que sean neceasarias, pide disculpas (no pasa nada, no eres infalible), transmite sensaciones dento y fuera del equipo, evita la situación típica de __IT esta en guerra, son los usuarios contra nosotros y vamos a ganar__, cambia usuario por compañeros, o jefes por responsables, si te has equvocado. dilo, busca la mejor solución, busca la forma de no vuelva a pasar y compártelo con todo el equipo. No escondas la basura bajo la alfombra, si los usuarios no estan contentos con el programa, pide disculpas, estudia los problemas que son y coméntalos con el equipo, localiza si es un problema de rendimiento, de interfaz, de proceso, propón la solución y llévala a cabo.
 
 Si hay un problema entre dos integrantes del equipo, implícate, estudia las razones reales del problema, plantea soluciones (puede que sea un problema de conocimientos, un problema de poca visibilidad del trabajo, un problema de disparidad de actitudes) y llévalas a cabo. Tu razón de ser es el EQUIPO cuanto mejor esté él, mejor eres tú.
 
-## 10 Disfruta. Pásatelo bien. Patron Flower Power
+## 10. Disfruta. Pásatelo bien. Patrón Flower Power
 
 Pásalo bien con tu equipo, habla de cosas no sean estrictamente laborales, haz que disfruten con el trabajo, alaba su fortalezas, tómate unas cervezas con el equipo, no plantes barreras donde no las hay, nadie es mejor que nadie, ni peor que nadie.
 
